@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import React from "react";
 
+import * as Animatable from "react-native-animatable";
+
 const spacerHeight = 500;
 
 const expenses = [
@@ -32,7 +34,7 @@ export default function Home() {
           }}
         />
       )}
-      <View className="h-36 p-4 justify-end bg-sky-700">
+      <View className="h-36 z-20 p-4 justify-end bg-sky-700">
         <SafeAreaView className="flex-row items-center justify-between">
           <Text className=" text-2xl text-sky-100">My expenses</Text>
           <TouchableOpacity className="bg-sky-600 p-2 rounded-full">
@@ -41,25 +43,34 @@ export default function Home() {
         </SafeAreaView>
       </View>
 
-      <View className="bg-sky-50 p-4 mx-2 my-8 rounded-md shadow-lg">
+      <Animatable.View
+        animation="fadeInDown"
+        className="bg-sky-50 z-10 p-4 mx-2 my-8 rounded-md shadow-lg"
+      >
         <Text className="text-gray-500 text-md mb-4">Pending to pay</Text>
         <View className="flex-row justify-between items-center">
           <Text className="text-gray-700 text-2xl">$ 4,000.00 MXN</Text>
           <Text className="text-gray-500 text-md">July 20</Text>
         </View>
-      </View>
+      </Animatable.View>
 
-      {expenses.map((expense) => (
-        <View
+      {expenses.map((expense, i) => (
+        <Animatable.View
           key={Math.random()}
+          animation="fadeInUpBig"
+          ease="ease-in-out"
+          delay={i * 50}
           className="flex-row bg-sky-50 mx-2 my-1 shadow-md rounded-lg p-4 expenses-center justify-between"
         >
-          <View>
-            <Text className="text-gray-700">{expense.name}</Text>
-            <Text className="text-gray-400 mt-2">{expense.category}</Text>
+          <View className="flex-row">
+            <View className="bg-red-500 mr-4 w-1" />
+            <View>
+              <Text className="text-gray-700">{expense.name}</Text>
+              <Text className="text-gray-400 mt-2">{expense.category}</Text>
+            </View>
           </View>
           <Text className="text-lg text-gray-700">$ {expense.debt} MXN</Text>
-        </View>
+        </Animatable.View>
       ))}
     </ScrollView>
   );
