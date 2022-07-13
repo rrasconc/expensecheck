@@ -19,7 +19,7 @@ const expenses = [
   { name: "Doctor", category: "Health", debt: "700.00" },
 ];
 
-export default function Home() {
+export function Home() {
   return (
     <ScrollView className="flex-1 bg-sky-100">
       {Platform.OS === "ios" && (
