@@ -1,27 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { TailwindProvider } from "tailwindcss-react-native";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-import { Home } from "./src/screens/Home";
-
-const Stack = createNativeStackNavigator();
+import { Navigation } from "./src/navigation";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <TailwindProvider>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="Home" component={Home} />
-        </Stack.Navigator>
-        <StatusBar style="auto" />
-      </TailwindProvider>
-    </NavigationContainer>
+    <TailwindProvider>
+      <Navigation />
+      <StatusBar style="auto" />
+    </TailwindProvider>
   );
 }

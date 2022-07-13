@@ -11,6 +11,14 @@ import React from "react";
 import * as Animatable from "react-native-animatable";
 
 const spacerHeight = 500;
+const headerStyle = {
+  backgroundColor: "#0369a1",
+  height: spacerHeight,
+  position: "absolute",
+  top: -spacerHeight,
+  left: 0,
+  right: 0,
+};
 
 const expenses = [
   { name: "Homerent", category: "Household", debt: "4,500.00" },
@@ -19,25 +27,19 @@ const expenses = [
   { name: "Doctor", category: "Health", debt: "700.00" },
 ];
 
-export function Home() {
+export function Home({ navigation }) {
   return (
     <ScrollView className="flex-1 bg-sky-100">
-      {Platform.OS === "ios" && (
-        <View
-          style={{
-            backgroundColor: "#0369a1",
-            height: spacerHeight,
-            position: "absolute",
-            top: -spacerHeight,
-            left: 0,
-            right: 0,
-          }}
-        />
-      )}
+      {Platform.OS === "ios" && <View style={headerStyle} />}
       <View className="h-36 z-20 p-4 justify-end bg-sky-700">
         <SafeAreaView className="flex-row items-center justify-between">
           <Text className=" text-2xl text-sky-100">My expenses</Text>
-          <TouchableOpacity className="bg-sky-600 p-2 rounded-full">
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Add");
+            }}
+            className="bg-sky-600 p-2 rounded-full"
+          >
             <Text className="text-gray-800 font-bold">Add expense</Text>
           </TouchableOpacity>
         </SafeAreaView>
@@ -60,7 +62,7 @@ export function Home() {
           animation="fadeInUpBig"
           ease="ease-in-out"
           delay={i * 50}
-          className="flex-row bg-sky-50 mx-2 my-1 shadow-md rounded-lg p-4 expenses-center justify-between"
+          className="flex-row bg-sky-50 mx-2 my-1 shadow-md rounded-lg p-4 expenses-center justify-between items-center"
         >
           <View className="flex-row">
             <View className="bg-red-500 mr-4 w-1" />
